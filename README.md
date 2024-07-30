@@ -58,11 +58,9 @@ VCR.configure do |config|
   config.allow_http_connections_when_no_cassette = false
 
   # Configure VCR to ignore requests during recording
-  config.before_record do |i|
-    MinitestHttplog.ignore_requests = true
-  end
-
-  config.after_record do |i|
+  config.around_http_request do |request|
+    MinitestHttplog.ignore_requests = true if VCR.current_cassette&.recording?
+    request.proceed
     MinitestHttplog.ignore_requests = false
   end
 end
