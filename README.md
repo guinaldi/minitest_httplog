@@ -4,10 +4,10 @@ Ruby gem designed to detect unmocked HTTP requests during tests using [Minitest]
 
 ## Features
 
-•	Automatic Detection: Automatically intercepts and detects all unmocked HTTP requests during tests.
-•	Minitest Integration: Logs failures in Minitest when an unmocked request is detected, ensuring the error is visible in test results.
-•	Detailed Logging: Logs detailed messages about unmocked requests, including the HTTP method, URI, and the test name.
-•	Easy Configuration: Simple configuration and conditional activation only in the test environment.
+* Automatic Detection: Automatically intercepts and detects all unmocked HTTP requests during tests.
+* Minitest Integration: Logs failures in Minitest when an unmocked request is detected, ensuring the error is visible in test results.
+* Detailed Logging: Logs detailed messages about unmocked requests, including the HTTP method, URI, and the test name.
+* Easy Configuration: Simple configuration and conditional activation only in the test environment.
 
 ## Installation
 
