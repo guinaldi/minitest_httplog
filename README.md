@@ -1,8 +1,13 @@
 # MinitestHttplog
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/minitest_httplog`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ruby gem designed to detect unmocked HTTP requests during tests using [Minitest](https://github.com/seattlerb/minitest) and [HttpLog](https://github.com/trusche/httplog). It intercepts HTTP requests made during tests and logs failures if any unmocked requests are detected, ensuring all external calls are properly mocked, thus improving the reliability and predictability of tests.
 
-TODO: Delete this and the text above, and describe your gem
+## Features
+
+•	Automatic Detection: Automatically intercepts and detects all unmocked HTTP requests during tests.
+•	Minitest Integration: Logs failures in Minitest when an unmocked request is detected, ensuring the error is visible in test results.
+•	Detailed Logging: Logs detailed messages about unmocked requests, including the HTTP method, URI, and the test name.
+•	Easy Configuration: Simple configuration and conditional activation only in the test environment.
 
 ## Installation
 
