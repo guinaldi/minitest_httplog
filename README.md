@@ -22,7 +22,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To use `minitest_httplog` in your tests, you need to require it in your test helper file. This gem will help you detect any unmocked HTTP requests in your tests.
+
+Here's a simple example of how to use it:
+
+1. Add the following line to your test helper file:
+
+```ruby
+require 'minitest/httplog'
+```
+
+2. Now, when you run your tests, `minitest_httplog` will raise an exception log on any HTTP requests and raise an error if they are not mocked.
+
+```console
+Failure:
+test [path]:
+Unmocked HTTP request detected: POST http://test.url during test: test_
+```
 
 ## Development
 
