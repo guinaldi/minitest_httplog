@@ -1,11 +1,12 @@
 require 'httplog'
 require 'minitest'
 
-module HttpLogMinitest
+module MinitestHttplog
   class << self
-    attr_accessor :current_test
+    attr_accessor :current_test, :ignore_requests
 
     def init
+      @ignore_requests = false
       HttpLog.configure do |config|
         config.logger = create_logger_decorator(config.logger)
       end
@@ -42,8 +43,8 @@ module HttpLogMinitest
             uri = extract_uri(message)
             method = extract_method(message)
 
-            if uri && method
-              full_message = "Unmocked HTTP request detected: #{method} #{uri} during test: #{HttpLogMinitest.current_test}"
+            if uri && method && !MinitestHttplog.ignore_requests
+              full_message = "Unmocked HTTP request detected: #{method} #{uri} during test: #{MinitestHttplog.current_test}"
 
               raise Minitest::Assertion, full_message
             end
@@ -64,16 +65,16 @@ module HttpLogMinitest
   end
 end
 
-HttpLogMinitest.init
+MinitestHttplog.init
 
 module Minitest
   class Test
     alias_method :run_without_httplog, :run
 
     def run(*args, &block)
-      HttpLogMinitest.current_test = self.name
+      MinitestHttplog.current_test = self.name
       result = run_without_httplog(*args, &block)
-      HttpLogMinitest.current_test = nil
+      MinitestHttplog.current_test = nil
       result
     end
   end
