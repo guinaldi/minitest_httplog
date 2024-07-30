@@ -44,6 +44,29 @@ Failure:
 test [path]:
 Unmocked HTTP request detected: POST http://test.url during test: test_
 ```
+## Configuration
+
+MinitestHttplog provides an option to ignore HTTP requests during specific test scenarios, such as when recording new VCR cassettes. This can be configured by setting the MinitestHttplog.ignore_requests attribute.
+
+Example using VCR gem:
+
+```ruby
+VCR.configure do |config|
+  config.cassette_library_dir = 'test/vcr_cassettes'
+  config.hook_into :webmock
+  config.ignore_localhost = true
+  config.allow_http_connections_when_no_cassette = false
+
+  # Configure VCR to ignore requests during recording
+  config.before_record do |i|
+    MinitestHttplog.ignore_requests = true
+  end
+
+  config.after_record do |i|
+    MinitestHttplog.ignore_requests = false
+  end
+end
+```
 
 ## Development
 
